@@ -11,6 +11,6 @@ public class Account {
     }
 
     public String printStatement() {
-        return null;
+        return "Date\tAmount\tBalance";
     }
 }
