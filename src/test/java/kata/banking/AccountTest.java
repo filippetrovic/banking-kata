@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountTest {
 
-    private Account account = new Account();;
+    private Account account = new Account();
 
     @Test
     public void shouldReturnHeader() {
@@ -42,7 +42,7 @@ public class AccountTest {
 
         // then
         assertThat(statement)
-                .containsSequence("+3500", "3500", "+1500", "5000");
+                .containsSequence("+3500", "3500", "\n", "+1500", "5000");
 
     }
 }
