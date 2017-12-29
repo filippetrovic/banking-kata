@@ -31,7 +31,7 @@ public class AccountTest {
     }
 
     @Test
-    public void shouldReturnMultipleTransactions() {
+    public void shouldReturnMultipleDepositTransactions() {
 
         // given
         account.deposit(3500);
