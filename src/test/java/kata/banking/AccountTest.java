@@ -29,4 +29,20 @@ public class AccountTest {
         assertThat(statement)
                 .containsSequence("+3500", "3500");
     }
+
+    @Test
+    public void shouldReturnMultipleTransactions() {
+
+        // given
+        account.deposit(3500);
+        account.deposit(1500);
+
+        // when
+        String statement = account.printStatement();
+
+        // then
+        assertThat(statement)
+                .containsSequence("+3500", "3500", "+1500", "5000");
+
+    }
 }
