@@ -2,6 +2,8 @@ package kata.banking;
 
 public class Account {
 
+    public static final String HEADER = "Date\tAmount\tBalance";
+
     public void deposit(int amount) {
 
     }
@@ -11,6 +13,6 @@ public class Account {
     }
 
     public String printStatement() {
-        return "Date\tAmount\tBalance";
+        return HEADER;
     }
 }

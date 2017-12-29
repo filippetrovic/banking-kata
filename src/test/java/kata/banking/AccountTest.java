@@ -12,7 +12,7 @@ public class AccountTest {
 
         String header = account.printStatement();
 
-        Assertions.assertThat(header).isEqualTo("Date\tAmount\tBalance");
+        Assertions.assertThat(header).isEqualTo(Account.HEADER);
     }
 
 
