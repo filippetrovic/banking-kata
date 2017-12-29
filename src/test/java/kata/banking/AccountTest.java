@@ -1,19 +1,32 @@
 package kata.banking;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AccountTest {
+
+    private Account account = new Account();;
 
     @Test
     public void shouldReturnHeader() {
 
-        Account account = new Account();
-
         String header = account.printStatement();
 
-        Assertions.assertThat(header).isEqualTo(Account.HEADER);
+        assertThat(header).isEqualTo(Account.HEADER);
     }
 
+    @Test
+    public void shouldReturnDepositAmountAndBalance() {
 
+        // given
+        account.deposit(3500);
+
+        // when
+        String statement = account.printStatement();
+
+        // then
+        assertThat(statement)
+                .containsSequence("+3500", "3500");
+    }
 }
