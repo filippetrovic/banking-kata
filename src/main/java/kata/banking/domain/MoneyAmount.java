@@ -2,25 +2,25 @@ package kata.banking.domain;
 
 import java.util.Objects;
 
-public class Amount {
+public class MoneyAmount {
     private final int amount;
 
-    public static Amount positive(int amount) {
+    public static MoneyAmount positive(int amount) {
         checkAmount(amount);
         return ofSigned(amount);
     }
 
-    public static Amount negative(int amount) {
+    public static MoneyAmount negative(int amount) {
         checkAmount(amount);
         return ofSigned(amount).negative();
     }
 
-    public static Amount zero() {
+    public static MoneyAmount zero() {
         return ofSigned(0);
     }
 
-    public static Amount ofSigned(int amount) {
-        return new Amount(amount);
+    public static MoneyAmount ofSigned(int amount) {
+        return new MoneyAmount(amount);
     }
 
     private static void checkAmount(int amount) {
@@ -29,7 +29,7 @@ public class Amount {
         }
     }
 
-    private Amount(int amount) {
+    private MoneyAmount(int amount) {
         this.amount = amount;
     }
 
@@ -37,11 +37,11 @@ public class Amount {
         return amount;
     }
 
-    public Amount negative() {
+    public MoneyAmount negative() {
         return ofSigned(-amount);
     }
 
-    public Amount plus(Amount other) {
+    public MoneyAmount plus(MoneyAmount other) {
         return ofSigned(this.amount + other.amount);
     }
 
@@ -54,7 +54,7 @@ public class Amount {
             return false;
         }
 
-        Amount other = (Amount) o;
+        MoneyAmount other = (MoneyAmount) o;
         return amount == other.amount;
     }
 

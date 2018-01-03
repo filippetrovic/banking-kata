@@ -23,16 +23,16 @@ public class BalanceLogTest {
     @Test
     public void shouldReturnTransactionWithDepositValue() {
 
-        balanceLog.logTransaction(TransactionCommand.of(Amount.positive(100)));
-        balanceLog.logTransaction(TransactionCommand.of(Amount.negative(200)));
-        balanceLog.logTransaction(TransactionCommand.of(Amount.positive(300)));
+        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
+        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
+        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
 
         assertThat(balanceLog.getTransactions())
-                .extracting(Transaction::getAmount)
+                .extracting(Transaction::getMoneyAmount)
                 .containsExactly(
-                        Amount.positive(100),
-                        Amount.negative(200),
-                        Amount.positive(300)
+                        MoneyAmount.positive(100),
+                        MoneyAmount.negative(200),
+                        MoneyAmount.positive(300)
                 );
 
     }
@@ -40,16 +40,16 @@ public class BalanceLogTest {
     @Test
     public void shouldReturnTransactionWithBalanceAtTheMomentsOfTransaction() {
 
-        balanceLog.logTransaction(TransactionCommand.of(Amount.positive(100)));
-        balanceLog.logTransaction(TransactionCommand.of(Amount.negative(200)));
-        balanceLog.logTransaction(TransactionCommand.of(Amount.positive(300)));
+        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
+        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
+        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
 
         assertThat(balanceLog.getTransactions())
                 .extracting(Transaction::getBalance)
                 .containsExactly(
-                        Amount.ofSigned(100),
-                        Amount.ofSigned(-100),
-                        Amount.ofSigned(200)
+                        MoneyAmount.ofSigned(100),
+                        MoneyAmount.ofSigned(-100),
+                        MoneyAmount.ofSigned(200)
                 );
 
     }

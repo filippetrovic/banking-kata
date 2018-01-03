@@ -10,7 +10,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Parameterized.class)
-public class AmountPlusTest {
+public class MoneyAmountPlusTest {
 
     @Parameters(name = "{0} + {1} = {2}")
     public static Iterable<Object[]> testCases() {
@@ -29,7 +29,7 @@ public class AmountPlusTest {
     private final int second;
     private final int expected;
 
-    public AmountPlusTest(int first, int second, int expected) {
+    public MoneyAmountPlusTest(int first, int second, int expected) {
         this.first = first;
         this.second = second;
         this.expected = expected;
@@ -37,8 +37,8 @@ public class AmountPlusTest {
 
     @Test
     public void test() {
-        final Amount result = Amount.ofSigned(first).plus(Amount.ofSigned(second));
+        final MoneyAmount result = MoneyAmount.ofSigned(first).plus(MoneyAmount.ofSigned(second));
 
-        assertThat(result).isEqualTo(Amount.ofSigned(expected));
+        assertThat(result).isEqualTo(MoneyAmount.ofSigned(expected));
     }
 }

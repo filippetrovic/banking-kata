@@ -2,17 +2,17 @@ package kata.banking.domain;
 
 public class TransactionCommand {
 
-    private final Amount amount;
+    private final MoneyAmount moneyAmount;
 
-    public static TransactionCommand of(Amount amount) {
-        return new TransactionCommand(amount);
+    public static TransactionCommand of(MoneyAmount moneyAmount) {
+        return new TransactionCommand(moneyAmount);
     }
 
-    private TransactionCommand(Amount amount) {
-        this.amount = amount;
+    private TransactionCommand(MoneyAmount moneyAmount) {
+        this.moneyAmount = moneyAmount;
     }
 
-    public Amount getAmount() {
-        return amount;
+    public MoneyAmount getMoneyAmount() {
+        return moneyAmount;
     }
 }

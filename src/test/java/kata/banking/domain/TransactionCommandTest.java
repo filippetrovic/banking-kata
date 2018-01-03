@@ -9,10 +9,10 @@ public class TransactionCommandTest {
     @Test
     public void shouldCreateCommandWithAmount() {
 
-        final TransactionCommand command = TransactionCommand.of(Amount.positive(300));
+        final TransactionCommand command = TransactionCommand.of(MoneyAmount.positive(300));
 
-        assertThat(command.getAmount())
-                .isEqualTo(Amount.positive(300));
+        assertThat(command.getMoneyAmount())
+                .isEqualTo(MoneyAmount.positive(300));
     }
 
 }

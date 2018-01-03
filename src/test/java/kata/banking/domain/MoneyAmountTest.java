@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AmountTest {
+public class MoneyAmountTest {
 
     @Test
     public void shouldCreateNegativeAmount() {
 
-        final Amount negative = Amount.negative(300);
+        final MoneyAmount negative = MoneyAmount.negative(300);
 
         assertThat(negative.intValue())
                 .isNegative()
@@ -20,7 +20,7 @@ public class AmountTest {
     @Test
     public void shouldCreatePositiveAmount() {
 
-        final Amount negative = Amount.positive(300);
+        final MoneyAmount negative = MoneyAmount.positive(300);
 
         assertThat(negative.intValue())
                 .isPositive()
@@ -30,7 +30,7 @@ public class AmountTest {
 
     @Test
     public void shouldCreateZeroAmount() {
-        final Amount zero = Amount.zero();
+        final MoneyAmount zero = MoneyAmount.zero();
 
         assertThat(zero.intValue())
                 .isEqualTo(0);
@@ -39,10 +39,10 @@ public class AmountTest {
     @Test
     public void shouldNegateAmount() {
         // given
-        final Amount negativeAmount = Amount.negative(300);
+        final MoneyAmount negativeAmount = MoneyAmount.negative(300);
 
         // when
-        final Amount positiveAmount = negativeAmount.negative();
+        final MoneyAmount positiveAmount = negativeAmount.negative();
 
         // then
         assertThat(positiveAmount.intValue())
@@ -52,21 +52,21 @@ public class AmountTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenNegativeIsUsedWithNegative() {
-        Amount.negative(-300);
+        MoneyAmount.negative(-300);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenNegativeIsUsedWithZero() {
-        Amount.negative(0);
+        MoneyAmount.negative(0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenPositiveIsUsedWithNegative() {
-        Amount.positive(-400);
+        MoneyAmount.positive(-400);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenPositiveIsUsedWithZero() {
-        Amount.positive(0);
+        MoneyAmount.positive(0);
     }
 }
