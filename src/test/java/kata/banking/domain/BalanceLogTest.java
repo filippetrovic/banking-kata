@@ -23,26 +23,26 @@ public class BalanceLogTest {
     @Test
     public void shouldReturnTransactionWithDepositValue() {
 
-        balanceLog.deposit(100);
-        balanceLog.deposit(200);
-        balanceLog.deposit(300);
+        balanceLog.logTransaction(100);
+        balanceLog.logTransaction(-200);
+        balanceLog.logTransaction(300);
 
         assertThat(balanceLog.getTransactions())
                 .extracting(Transaction::getAmount)
-                .containsExactly(100, 200, 300);
+                .containsExactly(100, -200, 300);
 
     }
 
     @Test
     public void shouldReturnTransactionWithBalanceAtTheMomentsOfTransaction() {
 
-        balanceLog.deposit(100);
-        balanceLog.deposit(200);
-        balanceLog.deposit(300);
+        balanceLog.logTransaction(100);
+        balanceLog.logTransaction(-200);
+        balanceLog.logTransaction(300);
 
         assertThat(balanceLog.getTransactions())
                 .extracting(Transaction::getBalance)
-                .containsExactly(100, 300, 600);
+                .containsExactly(100, -100, 200);
 
     }
 }

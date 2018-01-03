@@ -11,7 +11,7 @@ public class Account {
     private final BalanceLog balanceLog = new BalanceLog();
 
     public void deposit(int amount) {
-        balanceLog.deposit(amount);
+        balanceLog.logTransaction(amount);
     }
 
     public void withdraw(int amount) {

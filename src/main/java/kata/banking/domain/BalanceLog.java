@@ -11,7 +11,7 @@ public class BalanceLog {
     public BalanceLog() {
     }
 
-    public void deposit(int amount) {
+    public void logTransaction(int amount) {
         totalBalance += amount;
         transactions.add(new Transaction(amount, totalBalance));
     }
