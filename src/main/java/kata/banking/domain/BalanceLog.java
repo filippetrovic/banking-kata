@@ -6,7 +6,7 @@ import java.util.List;
 public class BalanceLog {
 
     private List<Transaction> transactions = new LinkedList<>();
-    private int totalBalance;
+    private int totalBalance = 0;
 
     public BalanceLog() {
     }
