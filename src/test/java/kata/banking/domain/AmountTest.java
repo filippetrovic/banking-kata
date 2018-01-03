@@ -11,7 +11,7 @@ public class AmountTest {
 
         final Amount negative = Amount.negative(300);
 
-        assertThat(negative.getAmount())
+        assertThat(negative.intValue())
                 .isNegative()
                 .isEqualTo(-300);
 
@@ -22,7 +22,7 @@ public class AmountTest {
 
         final Amount negative = Amount.positive(300);
 
-        assertThat(negative.getAmount())
+        assertThat(negative.intValue())
                 .isPositive()
                 .isEqualTo(300);
 
@@ -32,7 +32,7 @@ public class AmountTest {
     public void shouldCreateZeroAmount() {
         final Amount zero = Amount.zero();
 
-        assertThat(zero.getAmount())
+        assertThat(zero.intValue())
                 .isEqualTo(0);
     }
 
@@ -45,7 +45,7 @@ public class AmountTest {
         final Amount positiveAmount = negativeAmount.negative();
 
         // then
-        assertThat(positiveAmount.getAmount())
+        assertThat(positiveAmount.intValue())
                 .isPositive()
                 .isEqualTo(300);
     }

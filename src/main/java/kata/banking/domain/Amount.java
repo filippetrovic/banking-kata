@@ -33,7 +33,7 @@ public class Amount {
         this.amount = amount;
     }
 
-    public int getAmount() {
+    public int intValue() {
         return amount;
     }
 
