@@ -31,10 +31,11 @@ public class AccountTest {
     }
 
     @Test
-    public void shouldReturnMultipleDepositTransactions() {
+    public void shouldReturnMultipleTransactions() {
 
         // given
         account.deposit(3500);
+        account.withdraw(500);
         account.deposit(1500);
 
         // when
@@ -42,7 +43,10 @@ public class AccountTest {
 
         // then
         assertThat(statement)
-                .containsSequence("+3500", "3500", "\n", "+1500", "5000");
+                .containsSequence("\t+3500\t3500\n",
+                        "\t-500\t3000\n",
+                        "\t+1500\t4500");
 
     }
+
 }

@@ -16,7 +16,7 @@ public class Account {
     }
 
     public void withdraw(int amount) {
-
+        balanceLog.logTransaction(TransactionCommand.withdraw(amount));
     }
 
     public String printStatement() {
@@ -24,7 +24,8 @@ public class Account {
 
         if (balanceLog.getTransactions().size() > 0) {
             return balanceLog.getTransactions().stream()
-                    .map(transaction -> String.format("+%d\t%d", transaction.getAmount(), transaction.getBalance()))
+                    .map(transaction -> String.format("???\t%+d\t%d",
+                            transaction.getAmount(), transaction.getBalance()))
                     .collect(Collectors.joining("\n"));
         }
 
