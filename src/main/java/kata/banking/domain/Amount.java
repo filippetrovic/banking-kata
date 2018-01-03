@@ -15,6 +15,10 @@ public class Amount {
         return ofSigned(amount).negative();
     }
 
+    public static Amount zero() {
+        return ofSigned(0);
+    }
+
     public static Amount ofSigned(int amount) {
         return new Amount(amount);
     }

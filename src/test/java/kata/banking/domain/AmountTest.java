@@ -29,6 +29,14 @@ public class AmountTest {
     }
 
     @Test
+    public void shouldCreateZeroAmount() {
+        final Amount zero = Amount.zero();
+
+        assertThat(zero.getAmount())
+                .isEqualTo(0);
+    }
+
+    @Test
     public void shouldNegateAmount() {
         // given
         final Amount negativeAmount = Amount.negative(300);

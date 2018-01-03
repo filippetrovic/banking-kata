@@ -6,14 +6,14 @@ import java.util.List;
 public class BalanceLog {
 
     private List<Transaction> transactions = new LinkedList<>();
-    private int totalBalance = 0;
+    private Amount totalBalanceAmount = Amount.zero();
 
     public BalanceLog() {
     }
 
     public void logTransaction(TransactionCommand transactionCommand) {
-        totalBalance += transactionCommand.getSignedAmount();
-        transactions.add(new Transaction(transactionCommand.getSignedAmount(), totalBalance));
+        totalBalanceAmount = totalBalanceAmount.plus(transactionCommand.getAmount());
+        transactions.add(new Transaction(transactionCommand.getAmount().getAmount(), totalBalanceAmount.getAmount()));
     }
 
     public List<Transaction> getTransactions() {

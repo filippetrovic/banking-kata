@@ -12,7 +12,7 @@ public class TransactionCommand {
         this.amount = amount;
     }
 
-    public int getSignedAmount() {
-        return amount.getAmount();
+    public Amount getAmount() {
+        return amount;
     }
 }

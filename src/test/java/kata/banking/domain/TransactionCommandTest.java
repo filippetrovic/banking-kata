@@ -7,19 +7,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TransactionCommandTest {
 
     @Test
-    public void shouldCreateCommandWithPositiveAmount() {
+    public void shouldCreateCommandWithAmount() {
 
         final TransactionCommand command = TransactionCommand.of(Amount.positive(300));
 
-        assertThat(command.getSignedAmount()).isPositive();
-    }
-
-    @Test
-    public void shouldCreateCommandWithNegativeAmount() {
-
-        final TransactionCommand command = TransactionCommand.of(Amount.negative(300));
-
-        assertThat(command.getSignedAmount()).isNegative();
+        assertThat(command.getAmount())
+                .isEqualTo(Amount.positive(300));
     }
 
 }
