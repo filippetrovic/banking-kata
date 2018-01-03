@@ -3,12 +3,12 @@ package kata.banking.domain;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BalanceLog {
+public class AccountImplementation {
 
     private List<Transaction> transactions = new LinkedList<>();
     private MoneyAmount accountBalance = MoneyAmount.zero();
 
-    public BalanceLog() {
+    public AccountImplementation() {
     }
 
     public void logTransaction(TransactionCommand transactionCommand) {

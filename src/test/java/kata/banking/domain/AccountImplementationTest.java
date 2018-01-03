@@ -4,9 +4,9 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BalanceLogTest {
+public class AccountImplementationTest {
 
-    private BalanceLog balanceLog = new BalanceLog();
+    private AccountImplementation accountImplementation = new AccountImplementation();
 
     @Test
     public void shouldReturnEmptyListWhenNoTransactionIsLogged() {
@@ -15,7 +15,7 @@ public class BalanceLogTest {
         // nothing
 
         // then
-        assertThat(balanceLog.getTransactions())
+        assertThat(accountImplementation.getTransactions())
                 .isEmpty();
 
     }
@@ -23,11 +23,11 @@ public class BalanceLogTest {
     @Test
     public void shouldReturnTransactionWithDepositValue() {
 
-        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
-        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
-        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
+        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
+        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
+        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
 
-        assertThat(balanceLog.getTransactions())
+        assertThat(accountImplementation.getTransactions())
                 .extracting(Transaction::getMoneyAmount)
                 .containsExactly(
                         MoneyAmount.positive(100),
@@ -40,11 +40,11 @@ public class BalanceLogTest {
     @Test
     public void shouldReturnTransactionWithBalanceAtTheMomentsOfTransaction() {
 
-        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
-        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
-        balanceLog.logTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
+        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
+        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
+        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
 
-        assertThat(balanceLog.getTransactions())
+        assertThat(accountImplementation.getTransactions())
                 .extracting(Transaction::getBalance)
                 .containsExactly(
                         MoneyAmount.ofSigned(100),
