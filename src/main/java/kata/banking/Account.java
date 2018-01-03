@@ -21,8 +21,9 @@ public class Account {
     public String printStatement() {
         final StringBuilder statementBuilder = new StringBuilder(HEADER);
 
-        if (balanceLog.getTransactionHistory().size() > 0) {
-            return balanceLog.getTransactionHistory().stream()
+        if (balanceLog.getTransactions().size() > 0) {
+            return balanceLog.getTransactions().stream()
+                    .map(transaction -> String.format("+%d\t%d", transaction.getAmount(), transaction.getBalance()))
                     .collect(Collectors.joining("\n"));
         }
 
