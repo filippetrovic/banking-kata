@@ -28,6 +28,20 @@ public class AmountTest {
 
     }
 
+    @Test
+    public void shouldNegateAmount() {
+        // given
+        final Amount negativeAmount = Amount.negative(300);
+
+        // when
+        final Amount positiveAmount = negativeAmount.negative();
+
+        // then
+        assertThat(positiveAmount.getAmount())
+                .isPositive()
+                .isEqualTo(300);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenNegativeIsUsedWithNegative() {
         Amount.negative(-300);

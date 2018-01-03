@@ -3,14 +3,14 @@ package kata.banking.domain;
 public class Amount {
     private final int amount;
 
-    public static Amount negative(int amount) {
-        checkAmount(amount);
-        return new Amount(-amount);
-    }
-
     public static Amount positive(int amount) {
         checkAmount(amount);
         return new Amount(amount);
+    }
+
+    public static Amount negative(int amount) {
+        checkAmount(amount);
+        return new Amount(amount).negative();
     }
 
     private static void checkAmount(int amount) {
@@ -25,5 +25,9 @@ public class Amount {
 
     public int getAmount() {
         return amount;
+    }
+
+    public Amount negative() {
+        return new Amount(-amount);
     }
 }
