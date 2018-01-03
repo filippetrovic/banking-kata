@@ -2,8 +2,8 @@ package kata.banking.domain;
 
 public class Transaction {
 
-    private int amount;
-    private int balance;
+    private final int amount;
+    private final int balance;
 
     public Transaction(int amount, int balance) {
         this.amount = amount;
