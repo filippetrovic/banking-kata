@@ -2,46 +2,17 @@ package kata.banking.domain;
 
 public class TransactionCommand {
 
-    private final int amount;
-    private final Operation operation;
+    private final Amount amount;
 
-    public static TransactionCommand deposit(int amount) {
-        return new TransactionCommand(Operation.DEPOSIT, amount);
+    public static TransactionCommand of(Amount amount) {
+        return new TransactionCommand(amount);
     }
 
-    public static TransactionCommand withdraw(int amount) {
-        return new TransactionCommand(Operation.WITHDRAW, amount);
-    }
-
-    private TransactionCommand(Operation operation, int amount) {
-        checkAmount(amount);
-
-        this.operation = operation;
+    private TransactionCommand(Amount amount) {
         this.amount = amount;
     }
 
-    private void checkAmount(int amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Amount must be positive value, but was " + amount);
-        }
-    }
-
     public int getSignedAmount() {
-        return operation.getSign() * amount;
-    }
-
-    private enum Operation {
-        DEPOSIT(1),
-        WITHDRAW(-1);
-
-        private final int sign;
-
-        Operation(int sign) {
-            this.sign = sign;
-        }
-
-        public int getSign() {
-            return sign;
-        }
+        return amount.getAmount();
     }
 }

@@ -9,7 +9,7 @@ public class TransactionCommandTest {
     @Test
     public void shouldCreateCommandWithPositiveAmount() {
 
-        final TransactionCommand command = TransactionCommand.deposit(300);
+        final TransactionCommand command = TransactionCommand.of(Amount.positive(300));
 
         assertThat(command.getSignedAmount()).isPositive();
     }
@@ -17,22 +17,9 @@ public class TransactionCommandTest {
     @Test
     public void shouldCreateCommandWithNegativeAmount() {
 
-        final TransactionCommand command = TransactionCommand.withdraw(300);
+        final TransactionCommand command = TransactionCommand.of(Amount.negative(300));
 
         assertThat(command.getSignedAmount()).isNegative();
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenAmountIsNegative() {
-
-        TransactionCommand.deposit(-300);
-
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenAmountIsZero() {
-
-        TransactionCommand.withdraw(0);
-
-    }
 }
