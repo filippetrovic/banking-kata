@@ -23,9 +23,9 @@ public class AccountImplementationTest {
     @Test
     public void shouldReturnTransactionWithDepositValue() {
 
-        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
-        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
-        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
 
         assertThat(accountImplementation.getTransactions())
                 .extracting(Transaction::getMoneyAmount)
@@ -40,9 +40,9 @@ public class AccountImplementationTest {
     @Test
     public void shouldReturnTransactionWithBalanceAtTheMomentsOfTransaction() {
 
-        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
-        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
-        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
 
         assertThat(accountImplementation.getTransactions())
                 .extracting(Transaction::getBalance)

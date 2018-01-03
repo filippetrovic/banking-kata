@@ -11,7 +11,7 @@ public class AccountImplementation {
     public AccountImplementation() {
     }
 
-    public void logTransaction(TransactionCommand transactionCommand) {
+    public void executeTransaction(TransactionCommand transactionCommand) {
         accountBalance = accountBalance.plus(transactionCommand.getMoneyAmount());
         transactions.add(new Transaction(transactionCommand.getMoneyAmount(), accountBalance));
     }

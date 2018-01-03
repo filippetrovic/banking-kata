@@ -13,11 +13,11 @@ public class Account {
     private final AccountImplementation accountImplementation = new AccountImplementation();
 
     public void deposit(int amount) {
-        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.positive(amount)));
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(amount)));
     }
 
     public void withdraw(int amount) {
-        accountImplementation.logTransaction(TransactionCommand.of(MoneyAmount.negative(amount)));
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.negative(amount)));
     }
 
     public String printStatement() {
