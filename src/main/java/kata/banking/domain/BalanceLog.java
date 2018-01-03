@@ -13,7 +13,7 @@ public class BalanceLog {
 
     public void logTransaction(TransactionCommand transactionCommand) {
         totalBalanceAmount = totalBalanceAmount.plus(transactionCommand.getAmount());
-        transactions.add(new Transaction(transactionCommand.getAmount().getAmount(), totalBalanceAmount.getAmount()));
+        transactions.add(new Transaction(transactionCommand.getAmount(), totalBalanceAmount));
     }
 
     public List<Transaction> getTransactions() {

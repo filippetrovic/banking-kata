@@ -29,7 +29,11 @@ public class BalanceLogTest {
 
         assertThat(balanceLog.getTransactions())
                 .extracting(Transaction::getAmount)
-                .containsExactly(100, -200, 300);
+                .containsExactly(
+                        Amount.positive(100),
+                        Amount.negative(200),
+                        Amount.positive(300)
+                );
 
     }
 
@@ -42,7 +46,11 @@ public class BalanceLogTest {
 
         assertThat(balanceLog.getTransactions())
                 .extracting(Transaction::getBalance)
-                .containsExactly(100, -100, 200);
+                .containsExactly(
+                        Amount.ofSigned(100),
+                        Amount.ofSigned(-100),
+                        Amount.ofSigned(200)
+                );
 
     }
 }
