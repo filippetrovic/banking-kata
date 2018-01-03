@@ -28,7 +28,7 @@ public class AccountImplementationTest {
         accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
 
         assertThat(accountImplementation.getTransactions())
-                .extracting(Transaction::getMoneyAmount)
+                .extracting(Transaction::getTransactionAmount)
                 .containsExactly(
                         MoneyAmount.positive(100),
                         MoneyAmount.negative(200),

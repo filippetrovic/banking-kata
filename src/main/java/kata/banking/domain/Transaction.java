@@ -2,16 +2,16 @@ package kata.banking.domain;
 
 public class Transaction {
 
-    private final MoneyAmount moneyAmount;
+    private final MoneyAmount transactionAmount;
     private final MoneyAmount balance;
 
-    public Transaction(MoneyAmount moneyAmount, MoneyAmount balance) {
-        this.moneyAmount = moneyAmount;
+    public Transaction(MoneyAmount transactionAmount, MoneyAmount balance) {
+        this.transactionAmount = transactionAmount;
         this.balance = balance;
     }
 
-    public MoneyAmount getMoneyAmount() {
-        return moneyAmount;
+    public MoneyAmount getTransactionAmount() {
+        return transactionAmount;
     }
 
     public MoneyAmount getBalance() {

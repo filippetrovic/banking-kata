@@ -26,7 +26,7 @@ public class Account {
         if (accountImplementation.getTransactions().size() > 0) {
             return accountImplementation.getTransactions().stream()
                     .map(transaction -> String.format("???\t%+d\t%d",
-                            transaction.getMoneyAmount().intValue(),
+                            transaction.getTransactionAmount().intValue(),
                             transaction.getBalance().intValue()))
                     .collect(Collectors.joining("\n"));
         }
