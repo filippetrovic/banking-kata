@@ -23,9 +23,9 @@ public class BalanceLogTest {
     @Test
     public void shouldReturnTransactionWithDepositValue() {
 
-        balanceLog.logTransaction(100);
-        balanceLog.logTransaction(-200);
-        balanceLog.logTransaction(300);
+        balanceLog.logTransaction(TransactionCommand.deposit(100));
+        balanceLog.logTransaction(TransactionCommand.withdraw(200));
+        balanceLog.logTransaction(TransactionCommand.deposit(300));
 
         assertThat(balanceLog.getTransactions())
                 .extracting(Transaction::getAmount)
@@ -36,9 +36,9 @@ public class BalanceLogTest {
     @Test
     public void shouldReturnTransactionWithBalanceAtTheMomentsOfTransaction() {
 
-        balanceLog.logTransaction(100);
-        balanceLog.logTransaction(-200);
-        balanceLog.logTransaction(300);
+        balanceLog.logTransaction(TransactionCommand.deposit(100));
+        balanceLog.logTransaction(TransactionCommand.withdraw(200));
+        balanceLog.logTransaction(TransactionCommand.deposit(300));
 
         assertThat(balanceLog.getTransactions())
                 .extracting(Transaction::getBalance)

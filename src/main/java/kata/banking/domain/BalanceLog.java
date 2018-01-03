@@ -11,9 +11,9 @@ public class BalanceLog {
     public BalanceLog() {
     }
 
-    public void logTransaction(int amount) {
-        totalBalance += amount;
-        transactions.add(new Transaction(amount, totalBalance));
+    public void logTransaction(TransactionCommand transactionCommand) {
+        totalBalance += transactionCommand.getSignedAmount();
+        transactions.add(new Transaction(transactionCommand.getSignedAmount(), totalBalance));
     }
 
     public List<Transaction> getTransactions() {

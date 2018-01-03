@@ -1,6 +1,7 @@
 package kata.banking;
 
 import kata.banking.domain.BalanceLog;
+import kata.banking.domain.TransactionCommand;
 
 import java.util.stream.Collectors;
 
@@ -11,7 +12,7 @@ public class Account {
     private final BalanceLog balanceLog = new BalanceLog();
 
     public void deposit(int amount) {
-        balanceLog.logTransaction(amount);
+        balanceLog.logTransaction(TransactionCommand.deposit(amount));
     }
 
     public void withdraw(int amount) {
