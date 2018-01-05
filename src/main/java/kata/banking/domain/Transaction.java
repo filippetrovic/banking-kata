@@ -1,11 +1,15 @@
 package kata.banking.domain;
 
+import java.time.ZonedDateTime;
+
 public class Transaction {
 
     private final MoneyAmount transactionAmount;
     private final MoneyAmount balance;
+    private ZonedDateTime time;
 
-    public Transaction(MoneyAmount transactionAmount, MoneyAmount balance) {
+    public Transaction(ZonedDateTime time, MoneyAmount transactionAmount, MoneyAmount balance) {
+        this.time = time;
         this.transactionAmount = transactionAmount;
         this.balance = balance;
     }
@@ -16,5 +20,9 @@ public class Transaction {
 
     public MoneyAmount getBalance() {
         return balance;
+    }
+
+    public ZonedDateTime getTime() {
+        return time;
     }
 }
