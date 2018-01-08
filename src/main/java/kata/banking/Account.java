@@ -10,7 +10,7 @@ public class Account {
 
     public static final String HEADER = "Date\tMoneyAmount\tBalance\n";
 
-    private final AccountImplementation accountImplementation = new AccountImplementation();
+    private AccountImplementation accountImplementation = new AccountImplementation();
 
     public void deposit(int amount) {
         accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(amount)));
