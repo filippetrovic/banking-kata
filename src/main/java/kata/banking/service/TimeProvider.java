@@ -1,11 +1,11 @@
 package kata.banking.service;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 public class TimeProvider {
 
-    public ZonedDateTime getCurrentTime() {
-        return ZonedDateTime.now();
+    public LocalDate getCurrentTime() {
+        return LocalDate.now();
     }
 
 }

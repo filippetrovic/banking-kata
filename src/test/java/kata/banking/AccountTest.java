@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -41,7 +41,11 @@ public class AccountTest {
         // given
         when(accountImplementation.getTransactions())
                 .thenReturn(Collections.singletonList(
-                        new Transaction(ZonedDateTime.now(), MoneyAmount.positive(3500), MoneyAmount.positive(3500))
+                        new Transaction(
+                                LocalDate.now(),
+                                MoneyAmount.positive(3500),
+                                MoneyAmount.positive(3500)
+                        )
                 ));
 
         // when
@@ -58,9 +62,9 @@ public class AccountTest {
         // given
         when(accountImplementation.getTransactions())
                 .thenReturn(Arrays.asList(
-                        new Transaction(ZonedDateTime.now(), MoneyAmount.positive(3500), MoneyAmount.positive(3500)),
-                        new Transaction(ZonedDateTime.now(), MoneyAmount.negative(500), MoneyAmount.positive(3000)),
-                        new Transaction(ZonedDateTime.now(), MoneyAmount.positive(1500), MoneyAmount.positive(4500))
+                        new Transaction(LocalDate.now(), MoneyAmount.positive(3500), MoneyAmount.positive(3500)),
+                        new Transaction(LocalDate.now(), MoneyAmount.negative(500), MoneyAmount.positive(3000)),
+                        new Transaction(LocalDate.now(), MoneyAmount.positive(1500), MoneyAmount.positive(4500))
                 ));
 
 

@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,7 +40,7 @@ public class AccountImplementationDateProviderTest {
     public void shouldCreateTransactionWithGivenDateTime() {
 
         // given
-        final ZonedDateTime mockTime = ZonedDateTime.now();
+        final LocalDate mockTime = LocalDate.now();
         when(timeProvider.getCurrentTime()).thenReturn(mockTime);
 
         // when

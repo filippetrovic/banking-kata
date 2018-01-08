@@ -2,7 +2,7 @@ package kata.banking.domain;
 
 import org.junit.Test;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,7 +13,7 @@ public class TransactionTest {
         // given
         final MoneyAmount balance = MoneyAmount.positive(300);
         final MoneyAmount amount = MoneyAmount.negative(100);
-        final ZonedDateTime time = ZonedDateTime.now();
+        final LocalDate time = LocalDate.now();
 
         // when
         final Transaction transaction = new Transaction(time, amount, balance);
