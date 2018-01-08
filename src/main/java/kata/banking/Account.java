@@ -21,7 +21,6 @@ public class Account {
     }
 
     public String printStatement() {
-        final StringBuilder statementBuilder = new StringBuilder(HEADER);
 
         if (accountImplementation.getTransactions().size() > 0) {
             return accountImplementation.getTransactions().stream()
@@ -31,6 +30,6 @@ public class Account {
                     .collect(Collectors.joining("\n"));
         }
 
-        return statementBuilder.toString();
+        return HEADER;
     }
 }
