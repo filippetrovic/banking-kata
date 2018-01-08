@@ -3,6 +3,7 @@ package kata.banking;
 import kata.banking.domain.AccountImplementation;
 import kata.banking.domain.MoneyAmount;
 import kata.banking.domain.Transaction;
+import kata.banking.domain.TransactionCommand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -34,7 +36,7 @@ public class AccountTest {
     }
 
     @Test
-    public void shouldReturnDepositAmountAndBalance() {
+    public void shouldPrintDepositAmountAndBalance() {
 
         // given
         when(accountImplementation.getTransactions())
@@ -51,7 +53,7 @@ public class AccountTest {
     }
 
     @Test
-    public void shouldReturnMultipleTransactions() {
+    public void shouldPrintMultipleTransactions() {
 
         // given
         when(accountImplementation.getTransactions())
@@ -73,4 +75,29 @@ public class AccountTest {
 
     }
 
+    @Test
+    public void shouldInvokeAccountImplementationOnDeposit() {
+
+
+        // when
+        account.deposit(3500);
+
+        // then
+        verify(accountImplementation).executeTransaction(
+                TransactionCommand.of(MoneyAmount.positive(3500))
+        );
+    }
+
+    @Test
+    public void shouldInvokeAccountImplementationOnWithdraw() {
+
+
+        // when
+        account.withdraw(500);
+
+        // then
+        verify(accountImplementation).executeTransaction(
+                TransactionCommand.of(MoneyAmount.negative(500))
+        );
+    }
 }
