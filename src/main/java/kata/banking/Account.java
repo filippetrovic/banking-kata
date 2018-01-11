@@ -22,14 +22,15 @@ public class Account {
 
     public String printStatement() {
 
-        if (accountImplementation.getTransactions().size() > 0) {
-            return accountImplementation.getTransactions().stream()
-                    .map(transaction -> String.format("???\t%+d\t%d",
-                            transaction.getTransactionAmount().intValue(),
-                            transaction.getBalance().intValue()))
-                    .collect(Collectors.joining("\n"));
+        if (accountImplementation.getTransactions().isEmpty()) {
+            return HEADER;
         }
 
-        return HEADER;
+        return accountImplementation.getTransactions().stream()
+                .map(transaction -> String.format("???\t%+d\t%d",
+                        transaction.getTransactionAmount().intValue(),
+                        transaction.getBalance().intValue()))
+                .collect(Collectors.joining("\n"));
+
     }
 }
