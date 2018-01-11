@@ -2,10 +2,11 @@ package kata.banking.domain;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class TransactionHistory {
 
-    private List<Transaction> transactionHistory = new LinkedList<>();
+    private LinkedList<Transaction> transactionHistory = new LinkedList<>();
 
     public TransactionHistory() {
     }
@@ -16,5 +17,14 @@ public class TransactionHistory {
 
     public void addToHistory(Transaction transaction) {
         transactionHistory.add(transaction);
+    }
+
+    public Optional<Transaction> getLastTransaction() {
+
+        if (transactionHistory.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable(transactionHistory.getLast());
     }
 }

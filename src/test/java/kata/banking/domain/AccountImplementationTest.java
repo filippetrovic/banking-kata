@@ -1,18 +1,35 @@
 package kata.banking.domain;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AccountImplementationTest {
 
+    @Mock
+    private TransactionHistory transactionHistory;
+
+    @InjectMocks
     private AccountImplementation accountImplementation = new AccountImplementation();
 
     @Test
     public void shouldReturnEmptyListWhenNoTransactionIsLogged() {
 
-        // when
-        // nothing
+        when(transactionHistory.getHistory()).thenReturn(Collections.emptyList());
 
         // then
         assertThat(accountImplementation.getTransactions())
@@ -21,36 +38,58 @@ public class AccountImplementationTest {
     }
 
     @Test
-    public void shouldReturnTransactionWithDepositValue() {
+    public void shouldReturnResultsOfGetHistory() {
+        // given
+        List<Transaction> fakeValues = Arrays.asList(
+                new Transaction(LocalDate.now(), MoneyAmount.positive(123), MoneyAmount.positive(123)),
+                new Transaction(LocalDate.now(), MoneyAmount.negative(123), MoneyAmount.zero())
+        );
+        when(transactionHistory.getHistory()).thenReturn(fakeValues);
 
-        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
-        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
-        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
+        // when
+        final List<Transaction> returnedTransactions = accountImplementation.getTransactions();
 
-        assertThat(accountImplementation.getTransactions())
-                .extracting(Transaction::getTransactionAmount)
-                .containsExactly(
-                        MoneyAmount.positive(100),
-                        MoneyAmount.negative(200),
-                        MoneyAmount.positive(300)
-                );
-
+        // then
+        assertThat(returnedTransactions).containsExactlyElementsOf(fakeValues);
     }
 
     @Test
-    public void shouldReturnTransactionWithBalanceAtTheMomentsOfTransaction() {
+    public void shouldInvokeAddToHistoryWithExpectedTransactionWhenHistoryIsEmpty() {
+        // given
+        when(transactionHistory.getLastTransaction()).thenReturn(Optional.empty());
 
-        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(100)));
-        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.negative(200)));
-        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(300)));
+        // when
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(123)));
 
-        assertThat(accountImplementation.getTransactions())
-                .extracting(Transaction::getBalance)
-                .containsExactly(
-                        MoneyAmount.ofSigned(100),
-                        MoneyAmount.ofSigned(-100),
-                        MoneyAmount.ofSigned(200)
-                );
+        // then
+        final ArgumentCaptor<Transaction> argCaptor = ArgumentCaptor.forClass(Transaction.class);
+        verify(transactionHistory).addToHistory(argCaptor.capture());
 
+        final Transaction argument = argCaptor.getValue();
+        assertThat(argument.getTransactionAmount()).isEqualTo(MoneyAmount.positive(123));
+        assertThat(argument.getBalance()).isEqualTo(MoneyAmount.positive(123));
     }
+
+    @Test
+    public void shouldInvokeAddToHistoryWithExpectedTransactionWhenHistoryIsNotEmpty() {
+        // given
+        when(transactionHistory.getLastTransaction())
+                .thenReturn(Optional.of(new Transaction(
+                        LocalDate.now(),
+                        MoneyAmount.positive(100),
+                        MoneyAmount.positive(100))
+                ));
+
+        // when
+        accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(200)));
+
+        // then
+        final ArgumentCaptor<Transaction> argCaptor = ArgumentCaptor.forClass(Transaction.class);
+        verify(transactionHistory).addToHistory(argCaptor.capture());
+
+        final Transaction argument = argCaptor.getValue();
+        assertThat(argument.getTransactionAmount()).isEqualTo(MoneyAmount.positive(200));
+        assertThat(argument.getBalance()).isEqualTo(MoneyAmount.positive(300));
+    }
+
 }

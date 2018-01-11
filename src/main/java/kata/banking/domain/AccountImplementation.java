@@ -6,20 +6,24 @@ import java.util.List;
 
 public class AccountImplementation {
 
-    private final TransactionHistory transactionHistory = new TransactionHistory();
-    private MoneyAmount accountBalance = MoneyAmount.zero();
+    private TransactionHistory transactionHistory = new TransactionHistory();
     private TimeProvider timeProvider = new TimeProvider();
 
     public AccountImplementation() {
     }
 
     public void executeTransaction(TransactionCommand transactionCommand) {
-        accountBalance = accountBalance.plus(transactionCommand.getMoneyAmount());
+        MoneyAmount accountBalanceBeforeThisTransaction = transactionHistory.getLastTransaction()
+                .map(Transaction::getBalance)
+                .orElse(MoneyAmount.zero());
+
+        final MoneyAmount newAccountBalance = accountBalanceBeforeThisTransaction
+                .plus(transactionCommand.getMoneyAmount());
 
         final Transaction transaction = new Transaction(
                 timeProvider.getCurrentTime(),
                 transactionCommand.getMoneyAmount(),
-                accountBalance);
+                newAccountBalance);
 
         transactionHistory.addToHistory(transaction);
     }
