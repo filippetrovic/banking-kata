@@ -36,7 +36,7 @@ public class TransactionListFormatterTest {
 
         // then
         assertThat(statement)
-             .containsSequence("+3500", "3500");
+             .containsSequence(TransactionListFormatter.HEADER, "+3500", "3500");
     }
 
     @Test
@@ -54,7 +54,8 @@ public class TransactionListFormatterTest {
 
         // then
         assertThat(statement)
-             .containsSequence("\t+3500\t3500\n",
+             .containsSequence(TransactionListFormatter.HEADER,
+                  "\t+3500\t3500\n",
                   "\t-500\t3000\n",
                   "\t+1500\t4500");
 

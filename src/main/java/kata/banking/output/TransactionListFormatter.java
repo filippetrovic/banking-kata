@@ -18,7 +18,7 @@ public class TransactionListFormatter {
              .map(transaction -> String.format("???\t%+d\t%d",
                   transaction.getTransactionAmount().intValue(),
                   transaction.getBalance().intValue()))
-             .collect(Collectors.joining("\n"));
+             .collect(Collectors.joining("\n", HEADER, ""));
     }
 
 }
