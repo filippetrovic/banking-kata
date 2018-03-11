@@ -31,7 +31,7 @@ public class TransactionFormatterTest {
 
         // then
         Assertions.assertThat(result)
-             .isEqualTo("???\t+200\t300");
+             .isEqualTo("12.08.2018\t+200\t300");
 
     }
 
@@ -40,7 +40,7 @@ public class TransactionFormatterTest {
 
         // given
         Transaction transaction = new Transaction(
-             LocalDate.of(2018, Month.AUGUST, 12),
+             LocalDate.of(2018, Month.DECEMBER, 29),
              MoneyAmount.negative(500),
              MoneyAmount.negative(300));
 
@@ -49,7 +49,7 @@ public class TransactionFormatterTest {
 
         // then
         Assertions.assertThat(result)
-             .isEqualTo("???\t-500\t-300");
+             .isEqualTo("29.12.2018\t-500\t-300");
 
     }
 }

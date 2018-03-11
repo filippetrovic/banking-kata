@@ -5,6 +5,7 @@ import kata.banking.domain.Transaction;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +30,11 @@ public class TransactionListFormatterTest {
 
         // given
         final List<Transaction> transactions = Collections.singletonList(
-             new Transaction(LocalDate.now(), MoneyAmount.positive(3500), MoneyAmount.positive(3500))
+             new Transaction(
+                  LocalDate.of(1999, Month.JANUARY, 17),
+                  MoneyAmount.positive(3500),
+                  MoneyAmount.positive(3500)
+             )
         );
 
         // when
@@ -37,7 +42,7 @@ public class TransactionListFormatterTest {
 
         // then
         assertThat(statement)
-             .containsSequence(TransactionListFormatter.HEADER, "+3500", "3500");
+             .containsSequence(TransactionListFormatter.HEADER, "17.01.1999", "+3500", "3500");
     }
 
     @Test
@@ -45,9 +50,21 @@ public class TransactionListFormatterTest {
 
         // given
         final List<Transaction> transactions = Arrays.asList(
-             new Transaction(LocalDate.now(), MoneyAmount.positive(3500), MoneyAmount.positive(3500)),
-             new Transaction(LocalDate.now(), MoneyAmount.negative(500), MoneyAmount.positive(3000)),
-             new Transaction(LocalDate.now(), MoneyAmount.positive(1500), MoneyAmount.positive(4500))
+             new Transaction(
+                  LocalDate.of(1999, Month.JANUARY, 3),
+                  MoneyAmount.positive(3500),
+                  MoneyAmount.positive(3500)
+             ),
+             new Transaction(
+                  LocalDate.of(2001, Month.MAY, 23),
+                  MoneyAmount.negative(500),
+                  MoneyAmount.positive(3000)
+             ),
+             new Transaction(
+                  LocalDate.of(2002, Month.SEPTEMBER, 13),
+                  MoneyAmount.positive(1500),
+                  MoneyAmount.positive(4500)
+             )
         );
 
         // when
@@ -56,9 +73,9 @@ public class TransactionListFormatterTest {
         // then
         assertThat(statement)
              .containsSequence(TransactionListFormatter.HEADER,
-                  "\t+3500\t3500\n",
-                  "\t-500\t3000\n",
-                  "\t+1500\t4500");
+                  "03.01.1999\t+3500\t3500\n",
+                  "23.05.2001\t-500\t3000\n",
+                  "13.09.2002\t+1500\t4500");
 
     }
 
