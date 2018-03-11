@@ -16,10 +16,6 @@ public class TransactionListFormatter {
     }
 
     public String format(List<Transaction> transactionList) {
-        if (transactionList.isEmpty()) {
-            return HEADER;
-        }
-
         return transactionList.stream()
              .map(transactionFormatter::formatTransaction)
              .collect(Collectors.joining("\n", HEADER, ""));
