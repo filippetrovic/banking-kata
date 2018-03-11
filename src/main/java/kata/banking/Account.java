@@ -3,14 +3,12 @@ package kata.banking;
 import kata.banking.domain.AccountImplementation;
 import kata.banking.domain.MoneyAmount;
 import kata.banking.domain.TransactionCommand;
-
-import java.util.stream.Collectors;
+import kata.banking.output.TransactionListFormatter;
 
 public class Account {
 
-    public static final String HEADER = "Date\tMoneyAmount\tBalance\n";
-
     private AccountImplementation accountImplementation = new AccountImplementation();
+    private TransactionListFormatter transactionListFormatter = new TransactionListFormatter();
 
     public void deposit(int amount) {
         accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(amount)));
@@ -21,16 +19,7 @@ public class Account {
     }
 
     public String printStatement() {
-
-        if (accountImplementation.getTransactions().isEmpty()) {
-            return HEADER;
-        }
-
-        return accountImplementation.getTransactions().stream()
-                .map(transaction -> String.format("???\t%+d\t%d",
-                        transaction.getTransactionAmount().intValue(),
-                        transaction.getBalance().intValue()))
-                .collect(Collectors.joining("\n"));
-
+        return transactionListFormatter.format(accountImplementation.getTransactions());
     }
+
 }

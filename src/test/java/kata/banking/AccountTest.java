@@ -4,6 +4,7 @@ import kata.banking.domain.AccountImplementation;
 import kata.banking.domain.MoneyAmount;
 import kata.banking.domain.Transaction;
 import kata.banking.domain.TransactionCommand;
+import kata.banking.output.TransactionListFormatter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,7 +33,7 @@ public class AccountTest {
 
         String header = account.printStatement();
 
-        assertThat(header).isEqualTo(Account.HEADER);
+        assertThat(header).isEqualTo(TransactionListFormatter.HEADER);
     }
 
     @Test
