@@ -9,15 +9,19 @@ public class TransactionListFormatter {
 
     public static final String HEADER = "Date\tMoneyAmount\tBalance\n";
 
+    private TransactionFormatter transactionFormatter;
+
+    public TransactionListFormatter(TransactionFormatter transactionFormatter) {
+        this.transactionFormatter = transactionFormatter;
+    }
+
     public String format(List<Transaction> transactionList) {
         if (transactionList.isEmpty()) {
             return HEADER;
         }
 
         return transactionList.stream()
-             .map(transaction -> String.format("???\t%+d\t%d",
-                  transaction.getTransactionAmount().intValue(),
-                  transaction.getBalance().intValue()))
+             .map(transactionFormatter::formatTransaction)
              .collect(Collectors.joining("\n", HEADER, ""));
     }
 

@@ -13,7 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransactionListFormatterTest {
 
-    private TransactionListFormatter transactionListFormatter = new TransactionListFormatter();
+    private TransactionListFormatter transactionListFormatter =
+         new TransactionListFormatter(new TransactionFormatter());
 
     @Test
     public void shouldReturnHeader() {
