@@ -1,9 +1,9 @@
 package kata.banking.domain;
 
 import kata.banking.service.TimeProvider;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -20,8 +20,12 @@ public class AccountImplementationDateProviderTest {
     @Mock
     private TimeProvider timeProvider;
 
-    @InjectMocks
-    private AccountImplementation accountImplementation = new AccountImplementation();
+    private AccountImplementation accountImplementation;
+
+    @Before
+    public void setUp() {
+        accountImplementation = new AccountImplementation(new TransactionHistory(), timeProvider);
+    }
 
     @Test
     public void shouldInvokeTimeProviderWhenExecutingTransactionCommand() {

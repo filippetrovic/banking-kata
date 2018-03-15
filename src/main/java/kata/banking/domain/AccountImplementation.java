@@ -6,10 +6,12 @@ import java.util.List;
 
 public class AccountImplementation {
 
-    private TransactionHistory transactionHistory = new TransactionHistory();
-    private TimeProvider timeProvider = new TimeProvider();
+    private TransactionHistory transactionHistory;
+    private TimeProvider timeProvider;
 
-    public AccountImplementation() {
+    public AccountImplementation(TransactionHistory transactionHistory, TimeProvider timeProvider) {
+        this.transactionHistory = transactionHistory;
+        this.timeProvider = timeProvider;
     }
 
     public void executeTransaction(TransactionCommand transactionCommand) {

@@ -1,5 +1,7 @@
 package kata.banking.domain;
 
+import kata.banking.service.TimeProvider;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -24,7 +26,12 @@ public class AccountImplementationTest {
     private TransactionHistory transactionHistory;
 
     @InjectMocks
-    private AccountImplementation accountImplementation = new AccountImplementation();
+    private AccountImplementation accountImplementation;
+
+    @Before
+    public void setUp() {
+        accountImplementation = new AccountImplementation(transactionHistory, new TimeProvider());
+    }
 
     @Test
     public void shouldReturnEmptyListWhenNoTransactionIsLogged() {

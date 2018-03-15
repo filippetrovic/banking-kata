@@ -3,13 +3,17 @@ package kata.banking;
 import kata.banking.domain.AccountImplementation;
 import kata.banking.domain.MoneyAmount;
 import kata.banking.domain.TransactionCommand;
-import kata.banking.output.TransactionFormatter;
 import kata.banking.output.TransactionListFormatter;
 
 public class Account {
 
-    private AccountImplementation accountImplementation = new AccountImplementation();
-    private TransactionListFormatter transactionListFormatter = new TransactionListFormatter(new TransactionFormatter());
+    private AccountImplementation accountImplementation;
+    private TransactionListFormatter transactionListFormatter;
+
+    public Account(AccountImplementation accountImplementation, TransactionListFormatter transactionListFormatter) {
+        this.accountImplementation = accountImplementation;
+        this.transactionListFormatter = transactionListFormatter;
+    }
 
     public void deposit(int amount) {
         accountImplementation.executeTransaction(TransactionCommand.of(MoneyAmount.positive(amount)));

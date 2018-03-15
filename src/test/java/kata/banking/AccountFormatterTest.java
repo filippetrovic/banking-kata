@@ -4,6 +4,7 @@ import kata.banking.domain.AccountImplementation;
 import kata.banking.domain.MoneyAmount;
 import kata.banking.domain.Transaction;
 import kata.banking.output.TransactionListFormatter;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,7 +29,12 @@ public class AccountFormatterTest {
     private TransactionListFormatter transactionListFormatter;
 
     @InjectMocks
-    private Account account = new Account();
+    private Account account;
+
+    @Before
+    public void setUp() {
+        account = new Account(accountImplementation, transactionListFormatter);
+    }
 
     @Test
     public void shouldInvokeFormatWithEmptyList() {

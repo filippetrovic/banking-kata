@@ -3,9 +3,9 @@ package kata.banking;
 import kata.banking.domain.AccountImplementation;
 import kata.banking.domain.MoneyAmount;
 import kata.banking.domain.TransactionCommand;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -17,8 +17,12 @@ public class AccountDepositAndWithdrawTest {
     @Mock
     private AccountImplementation accountImplementation;
 
-    @InjectMocks
-    private Account account = new Account();
+    private Account account;
+
+    @Before
+    public void setUp() {
+        account = new Account(accountImplementation, null);
+    }
 
     @Test
     public void shouldInvokeAccountImplementationOnDeposit() {

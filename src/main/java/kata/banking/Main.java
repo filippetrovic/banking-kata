@@ -1,10 +1,22 @@
 package kata.banking;
 
+import kata.banking.domain.AccountImplementation;
+import kata.banking.domain.TransactionHistory;
+import kata.banking.output.TransactionFormatter;
+import kata.banking.output.TransactionListFormatter;
+import kata.banking.service.TimeProvider;
+
 public class Main {
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
 
-        final Account account = new Account();
+        final Account account = new Account(
+             new AccountImplementation(
+                  new TransactionHistory(),
+                  new TimeProvider()
+             ),
+             new TransactionListFormatter(new TransactionFormatter())
+        );
 
         account.withdraw(100);
         account.deposit(300);
